@@ -4,7 +4,7 @@ mod pis;
 use bevy::{
     prelude::*,
     core_pipeline::{
-        bloom::{BloomCompositeMode, BloomSettings},
+        bloom::BloomSettings,
         tonemapping::Tonemapping,
     },
 };
