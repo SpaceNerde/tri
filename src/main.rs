@@ -42,8 +42,8 @@ fn setup(
             hdr: true,
             ..default()
         },
-       tonemapping: Tonemapping::TonyMcMapface,
-       transform: Transform::from_xyz(0., 1.5, 6.).looking_at(Vec3::ZERO, Vec3::Y),
+        tonemapping: Tonemapping::TonyMcMapface,
+        transform: Transform::from_xyz(0., 100., 100.).looking_at(Vec3::ZERO, Vec3::Y),
         ..default()
     }, BloomSettings::default(),
     ));

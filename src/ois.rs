@@ -26,31 +26,29 @@ pub fn spawn_star(
 
     commands.spawn((
         PbrBundle {
-            mesh: sphere,
+            mesh: sphere.clone(),
             material: yellow_star_material.clone(),
             transform: Transform::from_xyz(
                 0.0,
                 0.0,
                 0.0,
-            )
-                .with_rotation(Quat::from_rotation_x(-PI / 4.)),
+            ),
             ..default()
         },
         Star,
     ));
 
-    commands.spawn(PointLightBundle {
-        point_light: PointLight {
-            intensity: 9000.0,
-            range: 100.,
-            shadows_enabled: true,
+    commands.spawn((
+        PbrBundle {
+            mesh: sphere.clone(),
+            material: yellow_star_material.clone(),
+            transform: Transform::from_xyz(
+                4.0,
+                0.0,
+                0.0,
+            ),
             ..default()
         },
-        transform: Transform::from_xyz(
-            0.,
-            0.0,
-            0.0
-        ),
-        ..default()
-    });
+        Star,
+    ));
 }
