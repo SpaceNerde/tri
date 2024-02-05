@@ -5,7 +5,7 @@ fn main() {
 
     app.add_plugins(DefaultPlugins.set(WindowPlugin {
         primary_window: Some(Window {
-            title: "Voxel Vegetables".to_string(),
+            title: "TRI".to_string(),
             // Bind to canvas included in `index.html`
             canvas: Some("#bevy".to_owned()),
             // The canvas size is constrained in index.html and build/web/styles.css
