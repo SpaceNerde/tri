@@ -1,7 +1,13 @@
 mod ois;
 mod pis;
 
-use bevy::prelude::*;
+use bevy::{
+    prelude::*,
+    core_pipeline::{
+        bloom::{BloomCompositeMode, BloomSettings},
+        tonemapping::Tonemapping,
+    },
+};
 use crate::ois::spawn_star;
 
 fn main() {
@@ -28,8 +34,14 @@ fn setup(
     mut commands: Commands,
 ) {
     // spawn main scene camera
-    commands.spawn(Camera3dBundle {
+    commands.spawn((Camera3dBundle {
+        camera: Camera {
+            hdr: true,
+            ..default()
+        },
+       tonemapping: Tonemapping::TonyMcMapface,
        transform: Transform::from_xyz(0., 1.5, 6.).looking_at(Vec3::ZERO, Vec3::Y),
         ..default()
-    });
+    }, BloomSettings::default(),
+    ));
 }

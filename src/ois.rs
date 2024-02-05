@@ -8,12 +8,14 @@ use std::f32::consts::PI;
 use bevy::{
     prelude::*,
     render::render_resource::{Extent3d, TextureDimension, TextureFormat},
+    core_pipeline::{
+        bloom::{BloomCompositeMode, BloomSettings},
+        tonemapping::Tonemapping,
+    },
 };
 
 #[derive(Component)]
 struct Star;
-
-const X_EXTENT: f32 = 14.5;
 
 pub fn spawn_star(
     mut commands: Commands,
@@ -23,7 +25,8 @@ pub fn spawn_star(
 ){
     // credit to: https://github.com/bevyengine/bevy/blob/latest/examples/3d/3d_shapes.rs
     let debug_material = materials.add(StandardMaterial {
-        base_color_texture: Some(images.add(uv_debug_texture())),
+        //base_color_texture: Some(images.add(uv_debug_texture())),
+        emissive: Color::YELLOW,
         ..default()
     });
 
@@ -43,6 +46,21 @@ pub fn spawn_star(
         },
         Star,
     ));
+
+    commands.spawn(PointLightBundle {
+        point_light: PointLight {
+            intensity: 9000.0,
+            range: 100.,
+            shadows_enabled: true,
+            ..default()
+        },
+        transform: Transform::from_xyz(
+            0.,
+            0.0,
+            0.0
+        ),
+        ..default()
+    });
 }
 
 // credit to: https://github.com/bevyengine/bevy/blob/latest/examples/3d/3d_shapes.rs
@@ -50,8 +68,8 @@ fn uv_debug_texture() -> Image {
     const TEXTURE_SIZE: usize = 8;
 
     let mut palette: [u8; 32] = [
-        255, 102, 159, 255, 255, 159, 102, 255, 236, 255, 102, 255, 121, 255, 102, 255, 102, 255,
-        198, 255, 102, 198, 255, 255, 121, 102, 255, 255, 236, 102, 255, 255,
+        255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+        255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
     ];
 
     let mut texture_data = [0; TEXTURE_SIZE * TEXTURE_SIZE * 4];
