@@ -1,4 +1,8 @@
+mod ois;
+mod pis;
+
 use bevy::prelude::*;
+use crate::ois::spawn_star;
 
 fn main() {
     let mut app = App::new();
@@ -15,8 +19,8 @@ fn main() {
             ..default()
         }),
         ..default()
-    }))
-        .add_systems(Startup, setup)
+    }).set(ImagePlugin::default_nearest()))
+        .add_systems(Startup, (setup, spawn_star))
         .run();
 }
 
