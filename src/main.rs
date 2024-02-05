@@ -1,5 +1,6 @@
 mod ois;
 mod pis;
+mod util;
 
 use bevy::{
     prelude::*,
@@ -9,6 +10,7 @@ use bevy::{
     },
 };
 use crate::ois::spawn_star;
+use crate::util::rotate_camera;
 
 fn main() {
     let mut app = App::new();
@@ -27,6 +29,7 @@ fn main() {
         ..default()
     }).set(ImagePlugin::default_nearest()))
         .add_systems(Startup, (setup, spawn_star))
+        .add_systems(Update, rotate_camera)
         .run();
 }
 
